@@ -17,7 +17,7 @@ type Face struct {
 	Confidence        float32
 }
 
-func Detect(image image.Gray) []*Face {
+func Detect(image *image.Gray) []*Face {
 	w, h := image.Rect.Dx(), image.Rect.Dy()
 	n := newNevenContext(w, h, 5)
 	if n == nil {

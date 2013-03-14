@@ -32,7 +32,7 @@ func newNevenContext(w, h int, maxFaces int) *nevenContext {
 }
 
 func (n *nevenContext) detect(buffer []byte) int {
-	return int(C.neven_detect(n.ctx, unsafe.Pointer(&buffer)))
+	return int(C.neven_detect(n.ctx, unsafe.Pointer(&buffer[0])))
 }
 
 func (n *nevenContext) getFace(i int) *Face {
