@@ -18,6 +18,23 @@ type Face struct {
 	Confidence        float32
 }
 
+func (f *Face) Rect() image.Rectangle {
+	eyeDist := f.RightEye.X - f.LeftEye.X
+	midX := (f.RightEye.X + f.LeftEye.X) / 2
+	midY := (f.RightEye.Y + f.LeftEye.Y) / 2
+
+	return image.Rectangle{
+		Min: image.Point{
+			X: int(midX - eyeDist*1.5 + 0.5),
+			Y: int(midY - eyeDist*2 + 0.5),
+		},
+		Max: image.Point{
+			X: int(midX + eyeDist*1.5 + 0.5),
+			Y: int(midY + eyeDist*2 + 0.5),
+		},
+	}
+}
+
 // Find faces from given image
 func Detect(img interface{}) []*Face {
 	var bwBuff []byte
